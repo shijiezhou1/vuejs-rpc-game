@@ -5,7 +5,7 @@ import Computercomputer from "@/views/Computercomputer.vue";
 describe("Computercomputer.vue", () => {
   it("test typeof instance in each script for computer vs computer", () => {
     assert.instanceOf(
-      Computercomputer.created,
+      Computercomputer.mounted,
       Function,
       "Expected to be function"
     );

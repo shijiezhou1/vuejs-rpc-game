@@ -1,6 +1,6 @@
 <template>
   <div class="about">
-    <img class="gameIcons" v-bind:src="imageLists" alt="img" />
+    <img class="gameIcons" v-bind:src="topSelectImage" alt="img" />
 
     <h1 class="msg">{{ msg }}</h1>
     <router-link class="gameModeButton" :to="'/' + backRoute"
@@ -30,17 +30,16 @@ export default {
       backRoute: null,
       userPick: null,
       computerPick: null,
-      imageLists: null,
-      selections: ["rock", "paper", "scissors"]
+      topSelectImage: null
     };
   },
   mounted() {
     const start_param = this.$store.getters.getGameMode.START_PARMA;
     this.msg = start_param.msg;
     this.backRoute = start_param.gameMode;
-    this.imageLists = require(`../assets/icons/${start_param.computerPick}-copy.png`);
+    this.topSelectImage = require(`../assets/icons/${start_param.computerPick}-copy.png`);
 
-    // SHOW BOTTON SELECTION
+    // HIGHTLIGHT BOTTON SELECTION
     document.querySelector(
       `.gameIcons-${start_param.userPick}`
     ).style.opacity = 1;

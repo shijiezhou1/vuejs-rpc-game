@@ -55,7 +55,7 @@ export default {
       clock: null
     };
   },
-  created() {
+  mounted() {
     this.clock = 5; // 5 SECONDS
     this.computerRandomSelect(); // TOP COMPUTER SELECT
     this.computerOnBottomRandomSelect(); // BOTTOM COMPUTER SELECT
