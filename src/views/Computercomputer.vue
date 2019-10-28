@@ -39,6 +39,7 @@
 export default {
   data: () => {
     return {
+      gameMode: "computercomputer",
       userSelect: null,
       userSelectIndex: null,
       computerSelect: null,
@@ -49,19 +50,22 @@ export default {
         w: "You Win!",
         l: "You Lose!"
       },
-      // MATRIX TO SHOW USER SELECT FIRST, AND THE COMPUTER SELECT AFTER
+      // MATRIX TO SHOW TOP COMPUTER SELECT FIRST, AND THE BUTTON COMPUTER SELECT AFTER
       results: [["t", "w", "l"], ["l", "t", "w"], ["w", "l", "t"]],
       clock: null
     };
   },
   created() {
-    this.clock = 5;
-    this.computerRandomSelect(); // COMPUTER SELECTS
+    this.clock = 5; // 5 SECONDS
+    this.computerRandomSelect(); // TOP COMPUTER SELECT
+    this.computerOnBottomRandomSelect(); // BOTTOM COMPUTER SELECT
     this.clockCountDown(); // START COUNT DONW
   },
   methods: {
-    choose: function(userSelect) {
-      this.userSelect = userSelect;
+    computerOnBottomRandomSelect: function() {
+      this.userSelect = this.selections[
+        Math.floor(Math.random() * this.selections.length)
+      ];
       this.userSelectIndex = this.selections.indexOf(this.userSelect);
       this.results[this.computerSelectIndex][this.userSelectIndex];
     },
@@ -81,9 +85,24 @@ export default {
         if (self.clock <= 0) {
           self.clock = 0;
           // REDIRECT TO RESULT
-          self.$router.push({ path: "/result" });
+          self.redirectAndStoreResult(self);
         }
       }, 1000);
+    },
+    redirectAndStoreResult(th) {
+      th.$store.commit("setGameMode", {
+        gameMode: this.gameMode,
+        userPick: this.userSelect,
+        computerPick: this.computerSelect,
+        result: this.results[this.computerSelectIndex][this.userSelectIndex],
+        msg: this.resultMsg[
+          this.results[this.computerSelectIndex][this.userSelectIndex]
+        ]
+      });
+
+      th.$router.push({
+        path: "/result"
+      });
     }
   }
 };
@@ -96,5 +115,6 @@ export default {
 .gameIcons {
   width: 100px;
   height: 90px;
+  cursor: pointer;
 }
 </style>

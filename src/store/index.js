@@ -4,16 +4,15 @@ import Vuex from "vuex";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {
-    gameMode: null,
-    userPick: null,
-    computerPick: null
-  },
+  state: {},
   mutations: {
-    setGameMode(state, payload) {
-      state.gameMode = payload.gameMode;
-      state.userPick = payload.userPick;
-      state.computerPick = payload.computerPick;
+    setGameMode(state, Object) {
+      state.START_PARMA = Object;
+    }
+  },
+  getters: {
+    getGameMode(state) {
+      return state;
     }
   },
   actions: {},

@@ -28,5 +28,6 @@
 }
 body {
   background-color: rgb(65, 133, 217);
+  padding: 0 36%;
 }
 </style>

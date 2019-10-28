@@ -39,6 +39,7 @@
 export default {
   data: () => {
     return {
+      gameMode: "playercomputer",
       userSelect: null,
       userSelectIndex: null,
       computerSelect: null,
@@ -55,7 +56,7 @@ export default {
     };
   },
   created() {
-    this.clock = 5;
+    this.clock = 5; // 5 SECONDS
     this.computerRandomSelect(); // COMPUTER SELECTS
     this.clockCountDown(); // START COUNT DONW
   },
@@ -63,11 +64,7 @@ export default {
     choose: function(userSelect) {
       this.userSelect = userSelect;
       this.userSelectIndex = this.selections.indexOf(this.userSelect);
-      const res = this.results[this.computerSelectIndex][this.userSelectIndex];
-      // clg
-
-      console.log(this.userSelect, "u - c", this.computerSelect);
-      console.log("win or lose or tie", res, this.resultMsg[res]);
+      this.results[this.computerSelectIndex][this.userSelectIndex];
     },
     computerRandomSelect() {
       this.computerSelect = this.selections[
@@ -84,17 +81,24 @@ export default {
         self.clock -= 1;
         if (self.clock <= 0) {
           self.clock = 0;
-          // REDIRECT TO RESULT
-
-          // this.$store.commit("namespaced/setGameMode", {
-          //   gameMode: "playervscomputer"
-          // });
-
-          self.$router.push({
-            path: "/result"
-          });
+          self.redirectAndStoreResult(self);
         }
       }, 1000);
+    },
+    redirectAndStoreResult(th) {
+      th.$store.commit("setGameMode", {
+        gameMode: this.gameMode,
+        userPick: this.userSelect,
+        computerPick: this.computerSelect,
+        result: this.results[this.computerSelectIndex][this.userSelectIndex],
+        msg: this.resultMsg[
+          this.results[this.computerSelectIndex][this.userSelectIndex]
+        ]
+      });
+
+      th.$router.push({
+        path: "/result"
+      });
     }
   }
 };
@@ -107,5 +111,6 @@ export default {
 .gameIcons {
   width: 100px;
   height: 90px;
+  cursor: pointer;
 }
 </style>

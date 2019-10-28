@@ -1,23 +1,23 @@
 <template>
   <div class="about">
-    <img class="gameIcons" src="../assets/icons/rock-copy.png" alt="img" />
+    <img class="gameIcons" v-bind:src="imageLists" alt="img" />
 
-    <h1 class="status">{{ status }}</h1>
-    <router-link class="gameModeButton" to="/playercomputer"
+    <h1 class="msg">{{ msg }}</h1>
+    <router-link class="gameModeButton" :to="'/' + backRoute"
       >Play again!</router-link
     >
     <router-link class="gameModeButton" to="/">Change mode</router-link>
 
-    <button @click="choose('rock')">
-      <img class="gameIcons" src="../assets/icons/rock.png" />
+    <button disabled>
+      <img class="gameIcons-rock" src="../assets/icons/rock.png" />
     </button>
 
-    <button @click="choose('paper')">
-      <img class="gameIcons" src="../assets/icons/paper.png" />
+    <button disabled>
+      <img class="gameIcons-paper" src="../assets/icons/paper.png" />
     </button>
 
-    <button @click="choose('scissors')">
-      <img class="gameIcons" src="../assets/icons/scissors.png" />
+    <button disabled>
+      <img class="gameIcons-scissors" src="../assets/icons/scissors.png" />
     </button>
   </div>
 </template>
@@ -26,18 +26,32 @@
 export default {
   data: function() {
     return {
-      status: null
+      msg: null,
+      backRoute: null,
+      userPick: null,
+      computerPick: null,
+      imageLists: null,
+      selections: ["rock", "paper", "scissors"]
     };
   },
-  created() {
-    this.status = "YOU WIN!";
+  mounted() {
+    const start_param = this.$store.getters.getGameMode.START_PARMA;
+    this.msg = start_param.msg;
+    this.backRoute = start_param.gameMode;
+    this.imageLists = require(`../assets/icons/${start_param.computerPick}-copy.png`);
+
+    // SHOW BOTTON SELECTION
+    document.querySelector(
+      `.gameIcons-${start_param.userPick}`
+    ).style.opacity = 1;
   }
 };
 </script>
 
 <style lang="css" scoped>
-.status {
-    color:white;
+.msg {
+  color: white;
+  font-size: 50px;
 }
 .gameModeButton {
   display: inline-block;
@@ -52,5 +66,23 @@ export default {
 .gameIcons {
   width: 100px;
   height: 90px;
+}
+
+.gameIcons-rock {
+  width: 100px;
+  height: 90px;
+  opacity: 0.2;
+}
+
+.gameIcons-paper {
+  width: 100px;
+  height: 90px;
+  opacity: 0.2;
+}
+
+.gameIcons-scissors {
+  width: 100px;
+  height: 90px;
+  opacity: 0.2;
 }
 </style>
