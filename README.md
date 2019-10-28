@@ -1,5 +1,9 @@
 # vuejs-rpc-game
 
+The game demo how you can create a rock paper scissors game. 
+It is a DDD design pattern and it used the very basic framework - vuejs.
+The element can be extends basic the feature that we expected.
+
 ## Project setup
 ```
 npm install
@@ -25,5 +29,8 @@ npm run test:unit
 npm run lint
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## This image show how the matrix arrays look like.
+This image provide all the possible result for only rock-paper-scissors game.
+<img src="./diagram.png">
+
+
