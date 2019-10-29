@@ -1,5 +1,5 @@
 <template>
-  <div class="about">
+  <div class="result">
     <img class="gameIcons" v-bind:src="topSelectImage" alt="img" />
 
     <h1 class="msg">{{ msg }}</h1>
@@ -9,15 +9,23 @@
     <router-link class="gameModeButton" to="/">Change mode</router-link>
 
     <button disabled>
-      <img class="gameIcons-rock" src="../assets/icons/rock.png" />
+      <img class="gameIcons-rock" ref="rock" src="../assets/icons/rock.png" />
     </button>
 
     <button disabled>
-      <img class="gameIcons-paper" src="../assets/icons/paper.png" />
+      <img
+        class="gameIcons-paper"
+        ref="paper"
+        src="../assets/icons/paper.png"
+      />
     </button>
 
     <button disabled>
-      <img class="gameIcons-scissors" src="../assets/icons/scissors.png" />
+      <img
+        class="gameIcons-scissors"
+        ref="scissor"
+        src="../assets/icons/scissors.png"
+      />
     </button>
   </div>
 </template>
@@ -28,21 +36,19 @@ export default {
     return {
       msg: null,
       backRoute: null,
-      userPick: null,
       computerPick: null,
       topSelectImage: null
     };
   },
-  mounted() {
-    const start_param = this.$store.getters.getGameMode.START_PARMA;
+  created() {
+    const start_param = this.$store.state.START_PARMA;
     this.msg = start_param.msg;
     this.backRoute = start_param.gameMode;
     this.topSelectImage = require(`../assets/icons/${start_param.computerPick}-copy.png`);
-
     // HIGHTLIGHT BOTTON SELECTION
-    document.querySelector(
-      `.gameIcons-${start_param.userPick}`
-    ).style.opacity = 1;
+    this.$nextTick(function() {
+      this.$refs[start_param.userPick].style.opacity = 1;
+    });
   }
 };
 </script>

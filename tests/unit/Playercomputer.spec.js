@@ -1,5 +1,4 @@
 import { assert } from "chai";
-// import { shallowMount } from "@vue/test-utils";
 import Playercomputer from "@/views/Playercomputer.vue";
 import sinon from "sinon";
 import Vue from "vue";
