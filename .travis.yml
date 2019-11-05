@@ -18,3 +18,8 @@ script:
   - npm run test:unit
   - npm run lint
   - npm run build
+  - cd disk/
+  - git init
+  - git add -A
+  - git commit -m 'deploy'
+  - git push -f git@github.com:shijiezhou1/vuejs-rpc-game.git master:gh-pages
