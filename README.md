@@ -4,6 +4,8 @@ The game demo how you can create a rock paper scissors game.
 It is a DDD design pattern and it used the very basic framework - vuejs.
 The element can be extends basic the feature that we expected.
 
+Demo: https://shijiezhou1.github.io/vuejs-rpc-game/
+
 ## Project setup
 ```
 npm install
