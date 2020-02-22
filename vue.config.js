@@ -1,3 +1,3 @@
 module.exports = {
-    publicPath: '/vuejs-rpc-game/'
-}
+  publicPath: "/vuejs-rpc-game/"
+};
